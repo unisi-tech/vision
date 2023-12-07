@@ -230,7 +230,7 @@ Next comes the groups of images and the distance to the other image of the pair.
 
 <h2>Analysis of the visual system for images.</h2>
 
-**	**Allows you to test the output of a trained neural network and calculate the most similar images of groups. Similar images make it possible to understand why the classifier’s response is as follows: adjust the Dataset and get a better result on the corrected Dataset.
+Allows you to test the output of a trained neural network and calculate the most similar images of groups. Similar images make it possible to understand why the classifier’s response is as follows: adjust the Dataset and get a better result on the corrected Dataset.
 
 
 ![image](https://github.com/Claus1/cvtools/assets/1247062/586d5629-8de2-45b4-9586-1f6fd8721c9a)
@@ -246,15 +246,15 @@ Information about the groups and their probabilities recognized by the neural ne
 
 The data in the table is as follows:
 
-_Group - group_ Dataset.
+**Group** - group_ Dataset.
 
-_Probability - the analyzer’s confidence (probability) that the image belongs to this group.	_
+**Probability** - the analyzer’s confidence (probability) that the image belongs to this group.	_
 
 Additional settings:
 
-	The Search switch, when active, activates the search for similar images.
+The Search switch, when active, activates the search for similar images.
 
-	How many images to search tells the system exactly how many similar images it should show in descending order of similarity.
+How many images to search tells the system exactly how many similar images it should show in descending order of similarity.
 
 <h2>
     		REST - server.</h2>
@@ -286,9 +286,9 @@ Additional settings:
         Example:
 
 
-[http://localhost:8000/cv?/home/george/Projects/save/animals/bison/4a11160cd7.jpg](http://localhost:8000/cv?/home/george/Projects/save/animals/bison/4a11160cd7.jpg):3
+[http://localhost:8000/cv?/home/george/Projects/save/animals/bison/4a11160cd7.jpg:3](http://localhost:8000/cv?/home/george/Projects/save/animals/bison/4a11160cd7.jpg)
 
-	 The returned result in JSON like
+	 The returned result in JSON format
 
 	
 ![image](https://github.com/Claus1/cvtools/assets/1247062/df3c61c4-6efb-495e-98e0-694f5fd7f0de)
