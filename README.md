@@ -4,6 +4,83 @@ The task of creating an image classifier based on a user dataset is a common tas
 
  CV tools is a visual information analysis service that includes tools for setting up and testing the necessary tasks for a non-programmer; it also allows you to use the trained system as a REST server for image analysis and multi-user support.
 
+ <h2>		How to use the CV Tools.</h2>
+
+
+0. Install dependencies.
+
+            Install pytorch according to the instructions [https://pytorch.org/get-started/locally/](https://pytorch.org/get-started/locally/)
+
+            Install dependent packages:
+
+
+    -Go to the working directory of CV Tools
+
+
+    -execute command `pip install -U -r requirements.txt`
+
+
+
+1. Setting up the program.
+
+    All program settings are stored in the config.py file and must be made before starting the program.
+
+
+    ```
+    dataset_dir
+    	Defines the full or relative path to the directory where the user dataset is located.
+
+    neuronet
+      Determines what type of neural network is used for additional training. All types of neural networks from the section are supported https://huggingface.co/models?pipeline_tag=image-classification&sort=trending
+    It makes sense to leave the value set 'facebook/convnextv2-base-22k-224' which provides the highest accuracy that I have tested or "facebook/convnextv2-tiny-1k-224",  if you are interested in maximum speed with a loss of accuracy of 3-5%.
+
+    test_size = 0.2
+    	The program automatically divides each group into two parts: training and testing. In the first part, the neural network is trained, in the second, which the neural network does not see during training, it is checked. The optimal values ​​are usually in the range of 0.2-0.3 and with a small number of images (up to 40) in a group 0.2 is selected, with a large number 0.25 - 0.3.
+
+    batch_size 
+    	Determines the size of the simultaneously analyzed group of images to build the index. Depends on the amount of GPU memory and RAM. The minimum value of 16 will allow training on weak hardware, 64 and 128 - for owners of powerful computers with a GPU of 16 GB or more.
+
+    max_equal_distance
+    	Defines the maximum distance in the n-dimensional space of the neural network at which images are considered very similar. Used to filter Errors results. It is selected experimentally for each type of neural network. Set by default for 'facebook/convnextv2-base-22k-224'
+    ```
+
+
+2. Start of the program.
+
+    ```
+    Go to the working directory and run the command
+    	python run.py
+    	Open Chrome at localhost:8000 or, if the server is on a remote host, server_address:8000
+    ```
+
+
+3. View the dataset,
+
+    ```
+    remove visible errors, for example irrelevant images in groups, expand the dataset using Google Images, if necessary.
+    ```
+
+
+4. Go to tab Learning tab
+
+    ```
+     and click Start learning.
+    Wait until the end and set the trained network as a system one by clicking button Set trained as the main button.
+    ```
+
+
+5. Analyze errors by clicking Calculate.
+
+    ```
+    Correct errors if possible as described below.
+    ```
+
+6. If the errors are corrected, go to step 4.
+
+    
+7. Switch to the Image analysis tab and test the system using images from the Internet.
+    
+
 At the top there is a system menu; clicking on the elements opens the corresponding screen.
 
 
@@ -14,42 +91,34 @@ At the top there is a system menu; clicking on the elements opens the correspond
 ![image](https://github.com/Claus1/cvtools/assets/1247062/1e369e73-359b-43de-ac76-36bafbff9ffd)
 
 
-	The dataset editor allows you to add and delete groups and group images to the system dataset.
+The dataset editor allows you to add and delete groups and group images to the system dataset.
 
-	Group images fall into the following categories:
+Group images fall into the following categories:
 
-	**Group** - images confirmed by the user and reliably reflecting membership in the group. Only images with this status are used when training the visual system.
+**Group** - images confirmed by the user and reliably reflecting membership in the group. Only images with this status are used when training the visual system.
 
-	**New** - images downloaded from Google Photos at the request of the user and requiring further viewing and changing the status to Group or Deleted.
+**New** - images downloaded from Google Photos at the request of the user and requiring further viewing and changing the status to Group or Deleted.
 
-	**Deleted** - images defined by the user as not belonging to the group. They are stored in the system for possible revision and to avoid repeated downloading and analysis. The system will not offer to reconsider an image previously rated by the user if it appears in the search results again.
+**Deleted** - images defined by the user as not belonging to the group. They are stored in the system for possible revision and to avoid repeated downloading and analysis. The system will not offer to reconsider an image previously rated by the user if it appears in the search results again.
 
-	Editing groups.
+<h3>	Editing groups. </h3>
 
-
-![image](https://github.com/Claus1/cvtools/assets/1247062/fd972608-01b7-4adc-82aa-7c00a712f8a6)
-  
-
-	Adding a group. A root or child group can be created.
+![image](https://github.com/Claus1/cvtools/assets/1247062/fd972608-01b7-4adc-82aa-7c00a712f8a6) Adding a group. A root or child group can be created.
 
 
-![image](https://github.com/Claus1/cvtools/assets/1247062/e9508faf-fb0f-43a6-897b-f7adbf62106b)
+![image](https://github.com/Claus1/cvtools/assets/1247062/54919ab0-ca78-4133-b363-c143bdf22d03) Rename the group.
 
 
-	Renaming a group.
+![image](https://github.com/Claus1/cvtools/assets/1247062/f79e6d70-afe9-4414-9d6c-038e367964d3) Delete a group.
 
+<h3> Editing images of Dataset groups. </h3>
 
-![image](https://github.com/Claus1/cvtools/assets/1247062/f79e6d70-afe9-4414-9d6c-038e367964d3)
-   Delete a group.
-
-    Editing images of Dataset groups. 
-
-	You can add images to any group. To do this, it makes sense to go to Google in the Images section in your browser and select a query for which Google will show the most relevant images for the desired group.
+You can add images to any group. To do this, it makes sense to go to Google in the Images section in your browser and select a query for which Google will show the most relevant images for the desired group.
 
 
 ![image](https://github.com/Claus1/cvtools/assets/1247062/5531536d-ed5a-4c71-8a73-e93e58d545c9)
 
-After that, in the Vision dataset window, select the group in the list of groups to which you want to add images and click
+Then in the Vision dataset window, select the group in the list of groups to which you want to add images and click
 ![image](https://github.com/Claus1/cvtools/assets/1247062/1665d4e3-45c3-4eb4-b0cb-8c0a47cfad1a)
  and it will appear
 
@@ -57,9 +126,9 @@ After that, in the Vision dataset window, select the group in the list of groups
 ![image](https://github.com/Claus1/cvtools/assets/1247062/979a167f-b6d2-493f-b08b-514150b921af)
 
 
-In this dialog you need to enter the selected query, the system will download all the images, add and open them in the New section.
+At the dialog you need to enter the selected query, the system will download images from Google references, add and open them in the New section.
 
-After this, the user must view and select the images by clicking on each one to transfer to the Group or Deleted sections.
+Then the user must view and select the images by clicking on each one to transfer to the Group or Deleted sections.
 
 
 ![image](https://github.com/Claus1/cvtools/assets/1247062/8cb1d9cf-7ab1-4348-bacb-ab34f5a42dc8)
@@ -86,19 +155,14 @@ Selecting group sections is done by clicking on the switch
 <h2>			Training the system (neural network).</h2>
 
 
-![image](https://github.com/Claus1/cvtools/assets/1247062/09ca582c-e705-4b6d-b836-8a7db963f85e)
+![image](https://github.com/Claus1/cvtools/assets/1247062/bcbe861a-4bbd-40ce-9e99-7347d10e552a)
 
 
 At this screen the system is trained using Dataset data. The training parameters have values ​​close to optimal, but can be changed and selected by the user to achieve maximum accuracy of the neural network. Detailed information about the meaning and meaning of these parameters can be found here [https://huggingface.co/docs/transformers/main_classes/trainer#transformers.TrainingArguments](https://huggingface.co/docs/transformers/main_classes/trainer#transformers.TrainingArguments) The user does not need to understand the meaning and meaning of these parameters.
 
 
-
-
-
 Start learning process. The learning progress is displayed in the Epochs table.
 
-
-![image](https://github.com/Claus1/cvtools/assets/1247062/bcbe861a-4bbd-40ce-9e99-7347d10e552a)
 
 
 The neural network is trained to achieve maximum accuracy.` During training, the system is not available for use by other users and systems.` 
@@ -191,85 +255,6 @@ Additional settings:
 	The Search switch, when active, activates the search for similar images.
 
 	How many images to search tells the system exactly how many similar images it should show in descending order of similarity.
-
-<h2>		How to use the CV Tools program.</h2>
-
-
-0. Install dependencies.
-
-            Install pytorch according to the instructions [https://pytorch.org/get-started/locally/](https://pytorch.org/get-started/locally/)
-
-            Install dependent packages:
-
-
-    -Go to the working directory of CV Tools
-
-
-    -execute command `pip install -U -r requirements.txt`
-
-
-
-1. Setting up the program.
-
-    All program settings are stored in the config.py file and must be made before starting the program.
-
-
-    ```
-    dataset_dir
-    	Defines the full or relative path to the directory where the user dataset is located.
-
-    neuronet
-      Determines what type of neural network is used for additional training. All types of neural networks from the section are supported https://huggingface.co/models?pipeline_tag=image-classification&sort=trending
-    It makes sense to leave the value set 'facebook/convnextv2-base-22k-224' which provides the highest accuracy that I have tested or "facebook/convnextv2-tiny-1k-224",  if you are interested in maximum speed with a loss of accuracy of 3-5%.
-
-    test_size = 0.2
-    	The program automatically divides each group into two parts: training and testing. In the first part, the neural network is trained, in the second, which the neural network does not see during training, it is checked. The optimal values ​​are usually in the range of 0.2-0.3 and with a small number of images (up to 40) in a group 0.2 is selected, with a large number 0.25 - 0.3.
-
-    batch_size 
-    	Determines the size of the simultaneously analyzed group of images to build the index. Depends on the amount of GPU memory and RAM. The minimum value of 16 will allow training on weak hardware, 64 and 128 - for owners of powerful computers with a GPU of 16 GB or more.
-
-    max_equal_distance
-    	Defines the maximum distance in the n-dimensional space of the neural network at which images are considered very similar. Used to filter Errors results. It is selected experimentally for each type of neural network. Set by default for 'facebook/convnextv2-base-22k-224'
-    ```
-
-
-2. Start of the program.
-
-    ```
-    Go to the working directory and run the command
-    	python run.py
-    	Open Chrome at localhost:8000 or, if the server is on a remote host, server_address:8000
-    ```
-
-
-3. View the dataset,
-
-    ```
-    remove visible errors, for example irrelevant images in groups, expand the dataset using Google Images, if necessary.
-    ```
-
-
-4. Go to tab Learning tab
-
-    ```
-     and click Start learning.
-    Wait until the end and set the trained network as a system one by clicking button Set trained as the main button.
-    ```
-
-
-5. Analyze errors by clicking Calculate.
-
-    ```
-    Correct errors if possible as described above.
-    ```
-
-
-6. If the errors are corrected, go to step 4.
-
-    ```
-    Otherwise, go to the Image analysis tab and test the system using images from the Internet.
-    ```
-
 
 <h2>
     		REST - server.</h2>

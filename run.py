@@ -1,11 +1,4 @@
 
-#optional:  add unigui path if unigui is installed near (for deep testing or developing)
-import os,sys
-wd = os.getcwd()
-pos = wd.rfind('/')
-if pos >= 0:
-    sys.path.insert(0,wd[:pos] + '/unigui')
-
 from aiohttp import web
 from classes import save_dataset_config
 from unigui import *
