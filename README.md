@@ -298,6 +298,6 @@ An example dataset used in preparing the article:
 
 [https://www.kaggle.com/datasets/iamsouravbanerjee/animal-image-dataset-90-different-animals](https://www.kaggle.com/datasets/iamsouravbanerjee/animal-image-dataset-90-different-animals)
 
-A possible problem:
+<h3>A possible problem:</h3>
 
-	The program was tested on Linux and Windows 10 with python 3.10.12. Python  versions for Windows have a bug (in my opinion) in the asyncio library, which does not allow visual just-in-time synchronization of the learning process with the state of CV tools. An adhoc bug fix has been made for version Python 3.10; this non-block problem is possible for other Python versions. 
+The program was tested on Linux and Windows 10 with python 3.10.12. Python  versions for Windows have a bug (in my opinion) in the asyncio library, which does not allow visual just-in-time synchronization of the learning process with the state of CV tools. An adhoc bug fix has been made for version Python 3.10; this non-block problem is possible for other Python versions. 
