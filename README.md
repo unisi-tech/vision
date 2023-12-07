@@ -9,9 +9,9 @@ The task of creating an image classifier based on a user dataset is a common tas
 
 0. Install dependencies.
 
-            Install pytorch according to the instructions [https://pytorch.org/get-started/locally/](https://pytorch.org/get-started/locally/)
+    Install pytorch according to the instructions [https://pytorch.org/get-started/locally/](https://pytorch.org/get-started/locally/)
 
-            Install dependent packages:
+    Install dependent packages:
 
 
     -Go to the working directory of CV Tools
@@ -25,8 +25,7 @@ The task of creating an image classifier based on a user dataset is a common tas
 
     All program settings are stored in the config.py file and must be made before starting the program.
 
-
-    ```
+    
     dataset_dir
     	Defines the full or relative path to the directory where the user dataset is located.
 
@@ -42,44 +41,34 @@ The task of creating an image classifier based on a user dataset is a common tas
 
     max_equal_distance
     	Defines the maximum distance in the n-dimensional space of the neural network at which images are considered very similar. Used to filter Errors results. It is selected experimentally for each type of neural network. Set by default for 'facebook/convnextv2-base-22k-224'
-    ```
 
 
 2. Start of the program.
 
-    ```
+
     Go to the working directory and run the command
     	python run.py
     	Open Chrome at localhost:8000 or, if the server is on a remote host, server_address:8000
-    ```
 
 
 3. View the dataset,
 
-    ```
     remove visible errors, for example irrelevant images in groups, expand the dataset using Google Images, if necessary.
-    ```
 
 
-4. Go to tab Learning tab
 
-    ```
-     and click Start learning.
+4. Go to tab Learning tab and click Start learning.
     Wait until the end and set the trained network as a system one by clicking button Set trained as the main button.
-    ```
-
 
 5. Analyze errors by clicking Calculate.
 
-    ```
     Correct errors if possible as described below.
-    ```
 
 6. If the errors are corrected, go to step 4.
-
     
 7. Switch to the Image analysis tab and test the system using images from the Internet.
     
+<h2>How to use </h2>
 
 At the top there is a system menu; clicking on the elements opens the corresponding screen.
 
@@ -192,20 +181,15 @@ The resulting network with maximum Accuracy can be saved and assigned in the sys
 
  Which shows incorrectly identified images. In the description of the image, the first is the erroneous group and its probability, the second is the real group of the image and its probability. For erroneous images, the probability of an erroneous group is greater than the probability of a correct and expected one.
 
-	For erroneously detected images, the following actions are provided:
-
-
-
- Transferring a image from the current group to another ‘correct’ one
+For erroneously detected imagesis  are provided transferring a image from the current group to another ‘correct’ one.
 
 
 ![image](https://github.com/Claus1/cvtools/assets/1247062/b51af6fa-956f-4db0-844d-c34a9d1166eb)
 .
 
-**	**To do this, select the desired images to transfer and press the button
+To do this, select the desired images to transfer and press the button
 ![image](https://github.com/Claus1/cvtools/assets/1247062/8739503e-bd77-4a0a-b45e-b886061cb7f7)
  and select the group where to transfer.
-
 
 
 2. Removing erroneously detected images.
