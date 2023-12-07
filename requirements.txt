@@ -1,0 +1,16 @@
+# pip install -U -r requirements.txt
+unigui
+requests
+icrawler
+lxml
+transformers
+datasets
+evaluate
+numpy
+accelerate
+faiss-cpu
+pillow  
+BeautifulSoup4 
+sentencepiece 
+scikit-learn
+
