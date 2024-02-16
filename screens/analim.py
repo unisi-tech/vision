@@ -36,7 +36,7 @@ def analyze_image(_, path):
         similar_block.value = [similar_block.value[0], images]
     return table4image, similar_block
 
-block_image = Block('Image Analysis', UploadImageButton('Load an image', analyze_image), table4image, 
+block_image = Block('Image Analysis', UploadButton('Load an image', analyze_image), table4image, 
                     icon = 'youtube_searched_for')
 
 blocks= [block_image, similar_block]
