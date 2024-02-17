@@ -1,4 +1,4 @@
-#unigui vars
+#unisi vars
 port = 8000 
 upload_dir = 'web'
 #logfile  = 'log'

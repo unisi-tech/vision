@@ -1,7 +1,7 @@
 import os, pickle
 from common import *
 from config import *
-from unigui import Info, divpath
+from unisi import Info, divpath
 
 def scan_dataset():
     classes = {}

@@ -1,7 +1,8 @@
 
 from aiohttp import web
 from classes import save_dataset_config
-from unigui import *
+
+from unisi import *
 import cv
 
 async def handle_cv(request):    
