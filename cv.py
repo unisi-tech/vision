@@ -94,6 +94,7 @@ def image_dataset(split = True):
     return dataset
 
 def classify_image(path):
+    arr = []
     if model:
         image = Image.open(path)
         inputs = image_processor(image, return_tensors="pt").to(device)    
@@ -105,7 +106,8 @@ def classify_image(path):
             for i, val in enumerate(predicted):
                 arr.append([id2label[i], val.item()])
             arr.sort(key = lambda _: _[1], reverse=True)
-        return arr
+    return arr
+    
 
 def extract_embeddings(model: torch.nn.Module):
     """Utility to compute embeddings."""

@@ -30,6 +30,8 @@ similar_block = Block('Similar images', [switch_search, how_many], icon='view_mo
 
 def analyze_image(_, path):
     table4image.rows = classify_image(path)
+    if not table4image.rows:
+        return Error('Neuronetwork is not found! Teach it first.')
     if switch_search.value:
         idata = search_image(path, how_many.value)
         images = [Image(imd[0], False, header=f'{imd[1]} {[imd[2]]}', width= 300, height= 200) for imd in idata]
