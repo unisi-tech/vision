@@ -31,7 +31,7 @@ def mode_changed(_, value):
     return image_block
 
 mode = Select('Status', sgroup, mode_changed, options=[sgroup, snew, sdeleted])
-how_many_photos = Edit('Photo count', 100, type = 'number')
+how_many_photos = Edit('Photo count', 100)
 keywords = Edit('Keywords for searching..', '')
 
 def callback_loading(n, filename):

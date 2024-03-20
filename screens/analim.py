@@ -24,7 +24,7 @@ def build_index(_, v):
     _.value = v
 
 switch_search = Switch('Search', exists(fvector_index), build_index, icon= 'tips_and_updates')
-how_many = Edit('How many images to search', 20, type = 'number')
+how_many = Edit('How many images to search', 20)
 
 similar_block = Block('Similar images', [how_many], icon='view_module', scroll=True, scaler=True)
 
