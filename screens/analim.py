@@ -26,7 +26,7 @@ def build_index(_, v):
 switch_search = Switch('Search', exists(fvector_index), build_index, icon= 'tips_and_updates')
 how_many = Edit('How many images to search', 20, type = 'number')
 
-similar_block = Block('Similar images', [switch_search, how_many], icon='view_module', scroll=True, scaler=True)
+similar_block = Block('Similar images', [how_many], icon='view_module', scroll=True, scaler=True)
 
 def analyze_image(_, path):
     table4image.rows = classify_image(path)
@@ -34,11 +34,13 @@ def analyze_image(_, path):
         return Error('Neuronetwork is not found! Teach it first.')
     if switch_search.value:
         idata = search_image(path, how_many.value)
-        images = [Image(imd[0], False, header=f'{imd[1]} {[imd[2]]}', width= 300, height= 200) for imd in idata]
+        scale = similar_block.scaler.value        
+        images = [Image(imd[0], False, header=f'{imd[1]} {[imd[2]]}', width= 300*scale, height= 200*scale) for imd in idata]
         similar_block.value = [similar_block.value[0], images]
     return table4image, similar_block
 
-block_image = Block('Image Analysis', UploadButton('Load an image', analyze_image), table4image, 
-                    icon = 'youtube_searched_for')
+block_image = Block('Image Analysis', [switch_search],
+    UploadButton('Load an image', analyze_image),  
+    table4image, icon = 'youtube_searched_for')
 
 blocks= [block_image, similar_block]

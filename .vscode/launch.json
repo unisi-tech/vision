@@ -9,7 +9,11 @@
             "type": "debugpy",
             "request": "launch",
             "program": "${file}",
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "PYTHONPATH" : "/home/george/Projects/unisi"
+            }
         }
     ]
 }
