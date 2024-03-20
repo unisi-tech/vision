@@ -37,7 +37,7 @@ def analyze_image(_, path):
         scale = similar_block.scaler.value        
         images = [Image(imd[0], False, header=f'{imd[1]} {[imd[2]]}', width= 300*scale, height= 200*scale) for imd in idata]
         similar_block.value = [similar_block.value[0], images]
-    return table4image, similar_block
+    return Redesign
 
 block_image = Block('Image Analysis', [switch_search],
     UploadButton('Load an image', analyze_image),  
