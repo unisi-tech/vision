@@ -278,9 +278,18 @@ How many images to search tells the system exactly how many similar images it sh
 ![image](https://github.com/Claus1/cvtools/assets/1247062/df3c61c4-6efb-495e-98e0-694f5fd7f0de)
 
 
-An example dataset used in preparing the article:
+An example dataset used for preparing the article:
 
 [https://www.kaggle.com/datasets/iamsouravbanerjee/animal-image-dataset-90-different-animals](https://www.kaggle.com/datasets/iamsouravbanerjee/animal-image-dataset-90-different-animals)
+
+<h2>
+    		Unified Remote API</h2>
+
+CV Tools supports Unified Remote API for using by external systems.
+
+Example for using:
+https://github.com/unisi-tech/unisi/blob/main/tests/proxy/run.py
+
 
 <h3>A possible problem:</h3>
 
