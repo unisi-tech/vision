@@ -35,7 +35,7 @@ def analyze_image(_, path):
     if switch_search.value:
         idata = search_image(path, how_many.value)
         scale = similar_block.scaler.value        
-        images = [Image(imd[0], False, header=f'{imd[1]} {[imd[2]]}', width= 300*scale, height= 200*scale) for imd in idata]
+        images = [Image(imd[0], False, label=f'{imd[1]} {[imd[2]]}', width= 300*scale, height= 200*scale) for imd in idata]
         similar_block.value = [similar_block.value[0], images]
     return Redesign
 

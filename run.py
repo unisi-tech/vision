@@ -21,6 +21,6 @@ async def handle_cv(request):
     return web.json_response(result)                        
 
 User.toolbar = [Button('_Save ds_config', lambda _, __ : save_dataset_config(), 
-                    icon = 'save', tooltip = 'Save dataset configuration')]
+    icon = 'save', tooltip = 'Save dataset configuration')]
 
 start(http_handlers = [web.get('/cv', handle_cv)])

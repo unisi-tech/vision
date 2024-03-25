@@ -87,7 +87,7 @@ def calc_anomalies(_, __):
             return Dialog('A search index does not exist! Create?', create_index)
     user.progress('Calculating anomalies..')
     err_list = cv.anomalies(atype.value == 'Duplicates')
-    images = [Image(file, False, selecting_changed, header = f'{dg}:{dp}\n {rg}:{rp}', width = 380, height = 240) 
+    images = [Image(file, False, selecting_changed, label = f'{dg}:{dp}\n {rg}:{rp}', width = 380, height = 240) 
             for dg, dp, rg, rp, file, _ in err_list]
     image_block.scroll_list = images
     return image_block
@@ -134,7 +134,7 @@ def move_images(_, __):
                 for group, files in class_images.items():            
                     if im.name in files:
                         files[im.name] = sdeleted
-                        mgr = move_group if move_group else im.header.split(':')[0]
+                        mgr = move_group if move_group else im.label.split(':')[0]
                         class_images[mgr][im.name] = sgroup    
                         break
 

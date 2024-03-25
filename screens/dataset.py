@@ -12,7 +12,7 @@ images = []
 
 def load_images(paths):
     global images
-    images = [Image(n, False, header = i + 1, width = 240, height = 120) for i, n in enumerate(paths) if n]
+    images = [Image(n, False, label = i + 1, width = 240, height = 120) for i, n in enumerate(paths) if n]
     image_block.scroll_list = images
 
 def mode_changed(_, value):    
