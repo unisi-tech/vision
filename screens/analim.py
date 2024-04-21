@@ -9,9 +9,9 @@ order = 3
 
 table4image = Table('Image classification', None, headers = ['Group', 'Probability'], tools = False, rows = [])
 
-def dialog_callback(_, bname):
+async def dialog_callback(_, bname):
     if bname == 'Ok':
-        user.progress('Creating index..')
+        await user.progress('Creating index..')
         create_index()
         switch_search.value = True
     else:

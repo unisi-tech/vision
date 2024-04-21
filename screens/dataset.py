@@ -34,15 +34,15 @@ mode = Select('Status', sgroup, mode_changed, options=[sgroup, snew, sdeleted])
 how_many_photos = Edit('Photo count', 100)
 keywords = Edit('Keywords for searching..', '')
 
-def callback_loading(n, filename):
-    user.progress(f" Downloaded {n} from {how_many_photos.value}..")
+async def callback_loading(n, filename):
+    await user.progress(f" Downloaded {n} from {how_many_photos.value}..")
 
-def scan_photos(_, val):        
+async def scan_photos(_, val):        
     if keywords.value and val == 'Ok':               
         if how_many_photos.value <= 0 or how_many_photos.value > 100:
             return Error(f'How many value has to be in range [1, 100]')
         
-        user.progress(f"Downloading images..")                
+        await user.progress(f"Downloading images..")                
         vgroup = class_images[group_list.value]     
         new_folder = get_pictures(keywords.value)
 

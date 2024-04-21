@@ -4,9 +4,9 @@ import evaluate, numpy as np
 import cv
 from config import neuronet
 
-def get_trainer(user, params):    
+async def get_trainer(user, params):    
     imageProcessor = AutoImageProcessor.from_pretrained(neuronet)
-    user.progress('Prepare training..')
+    await user.progress('Prepare training..')
     
     transform = cv.transform_learn(imageProcessor)
     def transforms(examples):
@@ -31,13 +31,13 @@ def get_trainer(user, params):
         label2id[label] = str(i)
         id2label[str(i)] = label
 
-    user.progress(f'Loading {neuronet} network..')
+    await user.progress(f'Loading {neuronet} network..')
     
     model = AutoModelForImageClassification.from_pretrained(neuronet, num_labels=len(labels),
         ignore_mismatched_sizes=True, id2label =id2label, label2id=label2id)
     model.to(cv.device)
 
-    user.progress(f'Running 1 epoch..')
+    await user.progress(f'Running epochs..')
 
     training_args = TrainingArguments(
         output_dir="checkpoints",

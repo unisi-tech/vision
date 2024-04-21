@@ -3,7 +3,7 @@ from common import *
 from config import *
 from classes import *
 from transformers import TrainerCallback
-import train, cv
+import train, cv, asyncio
 
 name = "Learning"
 icon = 'face_retouching_natural'
@@ -18,7 +18,7 @@ class StatCallback(TrainerCallback):
             if 'eval_accuracy' in info:
                 epoch = len(epochtable.rows) + 1
                 epochtable.rows.append([epoch, info['eval_accuracy'], info['eval_loss']])
-                user.progress(f'Running {epoch + 1} epoch..', epochtable)
+                #user.progress(f'Running {epoch + 1} epoch..', epochtable)
                 break
 
 epochtable = Table('Epochs', None, headers = ['Epoch', 'Accuracy', 'Loss'], tools = False)
@@ -31,14 +31,14 @@ pblock = ParamBlock('Learning parameters', learning_rate=3e-4 if 'convnext' in n
     warmup_ratio=0.1,
     logging_steps=10)
 
-def runlearn(_, val):
+async def runlearn(_, val):
     global trainer
     epochtable.rows = []
-    user.progress('Learning..', epochtable)    
-    trainer = train.get_trainer(user, pblock.params)
+    await user.progress('Learning..', epochtable)    
+    trainer = await train.get_trainer(user, pblock.params)
     trainer.add_callback(StatCallback)
     trainer.train()
-    return Info('Learing is finished. You can save the network if the result is satisfied.')
+    return Info('Learing is finished. You can save the network if the result is satisfied.', epochtable)
 
 create_index_switch = Switch('Create image index', True, type = 'check')
 
@@ -49,22 +49,22 @@ def set_main(_, val):
         else 'Do you want set the trainned net as the system one?'
     return Dialog(question, set_main_responce, create_index_switch)
     
-def set_main_responce(_, bname):
+async def set_main_responce(_, bname):
     if bname == 'Ok':
-        user.progress('Set neuronet..')
+        await user.progress('Set neuronet..')
         trainer.save_model(fneuronet)
         save_dataset_config()
         cv.load_model()
         if create_index_switch.value:
-            user.progress('Create index..')
+            await user.progress('Create index..')
             cv.create_index()
         else:
             cv.remove_index()
         return Info('Successfully done.')
     
-def create_index(_, bname):
+async def create_index(_, bname):
     if bname == 'Ok':        
-        user.progress('Create index..')
+        await user.progress('Create index..')
         cv.create_index()
         return calc_anomalies(0,0)
     
@@ -78,14 +78,14 @@ def selecting_changed(image, select):
                 im.value = select         
         return image_block
     
-def calc_anomalies(_, __):
+async def calc_anomalies(_, __):
     global err_list
     if not cv.model:
         return Warning('You have to learn the system first!')
     if atype.value == 'Duplicates':
         if not exists(fvector_index):
             return Dialog('A search index does not exist! Create?', create_index)
-    user.progress('Calculating anomalies..')
+    await user.progress('Calculating anomalies..')
     err_list = cv.anomalies(atype.value == 'Duplicates')
     images = [Image(file, False, selecting_changed, label = f'{dg}:{dp}\n {rg}:{rp}', width = 380, height = 240) 
             for dg, dp, rg, rp, file, _ in err_list]
@@ -93,6 +93,7 @@ def calc_anomalies(_, __):
     return image_block
         
 startbut = Button('Start leaning', runlearn, icon = 'cast_for_education')
+
 setasmain_but = Button('Set the trained as main', set_main)
 
 tblock = Block('Training', [startbut, setasmain_but], epochtable, icon = 'settings_suggest')
@@ -103,18 +104,18 @@ def sel_images():
     images = image_block.scroll_list
     return [im for im in images if im.value]
 
-def delete_images(_, __):
+async def delete_images(_, __):
     allimages = image_block.value[1] if len(image_block.value) > 1 else []
     images = [im for im in allimages if im.value]
     
-    def delete(_, bname):
+    async def delete(_, bname):
         if bname == 'Ok':
             for im in images:
                 for files in class_images.values():            
                     if im.name in files:
                         files[im.name] = sdeleted                        
                         break
-            user.progress('Creating index..')
+            await user.progress('Creating index..')
             cv.create_index()
             return calc_anomalies(0,0)
 
