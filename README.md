@@ -290,5 +290,3 @@ CV Tools supports Unified Remote API for using by external systems.
 Example for using:
 https://github.com/unisi-tech/unisi/blob/main/tests/proxy/run.py
 
-
-asyncio library does not allow visual just-in-time synchronization of the learning process with the actual state of CV tools. An adhoc for overcoming the issue fix was removed for 'standart' way following. 
