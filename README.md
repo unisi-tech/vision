@@ -288,5 +288,5 @@ An example dataset used for preparing the article:
 CV Tools supports Unified Remote API for using by external systems.
 
 Example for using:
-https://github.com/unisi-tech/unisi/blob/main/tests/proxy/run.py
+https://github.com/unisi-tech/unisi/blob/main/tests/proxy/run_vision.py
 
