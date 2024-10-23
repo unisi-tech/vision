@@ -2,7 +2,7 @@ from aiohttp import web
 from classes import save_dataset_config
 
 from unisi import *
-import cv, classes
+import cv
 
 async def handle_cv(request):    
     fs_count = request.query_string.split(':')                

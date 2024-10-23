@@ -27,8 +27,7 @@ def mode_changed(_, value):
         add2group.edit = True
     else:
         delete.edit = False
-        add2group.edit = True
-    return image_block
+        add2group.edit = True    
 
 mode = Select('Status', sgroup, mode_changed, options=[sgroup, snew, sdeleted])
 how_many_photos = Edit('Photo count', 100)
@@ -56,8 +55,7 @@ async def scan_photos(_, val):
                 if (fn.endswith('.jpg') or fn.endswith('.jpeg') or 
                     fn.endswith('.png') or fn.endswith('.webp')):
                     vgroup[fn] = snew 
-        mode_changed(mode, snew)        
-        return image_block
+        mode_changed(mode, snew)                
     
 def extend_images(_, __):
     if not group_list.value:
@@ -104,8 +102,7 @@ def add_images(_, v):
 
 def invert(_, v):
     for i in images:
-        i.value = not i.value
-    return image_block        
+        i.value = not i.value           
 
 ext = Button('Extend images', extend_images, icon='collections')
 delete = Button('Delete', delete_images, icon='highlight_off')

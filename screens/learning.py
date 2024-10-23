@@ -89,8 +89,7 @@ async def calc_anomalies(_, __):
     err_list = cv.anomalies(atype.value == 'Duplicates')
     images = [Image(file, False, selecting_changed, label = f'{dg}:{dp}\n {rg}:{rp}', width = 380, height = 240) 
             for dg, dp, rg, rp, file, _ in err_list]
-    image_block.scroll_list = images
-    return image_block
+    image_block.scroll_list = images    
         
 startbut = Button('Start leaning', runlearn, icon = 'cast_for_education')
 
