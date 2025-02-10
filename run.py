@@ -11,6 +11,9 @@ async def handle_cv(request):
         fs += ':' + fs_count[1]
         fs_count.pop(0)
         fs = cache_url(fs)
+
+    if not fs:
+        raise web.HTTPBadRequest(text="File name is required.")
     
     result = cv.classify_image(fs)
     count = 0 if len(fs_count) < 2 else int(fs_count[1])

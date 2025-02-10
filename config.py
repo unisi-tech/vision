@@ -5,7 +5,8 @@ upload_dir = 'web'
 appname = 'CV Tools'
 
 #images dataset
-dataset_dir = '/home/george/Projects/save/animals' 
+dataset_dir = '/home/george/Projects/pylab/images' 
+#dataset_dir = '/home/george/Projects/save/animals' 
 #neuronet = "facebook/convnextv2-tiny-1k-224"
 neuronet = 'facebook/convnextv2-base-22k-224'
 test_size = 0.2
